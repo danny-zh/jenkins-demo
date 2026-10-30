@@ -18,6 +18,7 @@ pipeline{
                 echo ' "Testing the app..."'
                 sh 'docker run -d --name time-app-container -p 5000:5000 time-app'
                 echo 'App is running on port http://localhost:5000'
+                sleep 20
             }
         }
     }
