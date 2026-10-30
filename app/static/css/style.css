@@ -1,0 +1,118 @@
+:root {
+  --bg: #0f172a;
+  --card: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.12);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent-1: #6366f1;
+  --accent-2: #22d3ee;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden;
+}
+
+.bg-blob {
+  position: fixed;
+  width: 32rem;
+  height: 32rem;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.55;
+  z-index: 0;
+  animation: float 14s ease-in-out infinite alternate;
+}
+
+.blob-1 { background: var(--accent-1); top: -8rem; left: -8rem; }
+.blob-2 { background: var(--accent-2); bottom: -8rem; right: -8rem; animation-delay: -7s; }
+
+@keyframes float {
+  to { transform: translate(4rem, 3rem) scale(1.1); }
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  width: min(90vw, 36rem);
+  padding: 3rem 2.5rem;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.12);
+  border-radius: 999px;
+}
+
+h1 {
+  margin-top: 1rem;
+  font-size: clamp(2.5rem, 7vw, 3.75rem);
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  margin-top: 0.5rem;
+  color: var(--muted);
+}
+
+.clock {
+  margin: 2.5rem 0 2rem;
+}
+
+.time {
+  font-size: clamp(2.5rem, 9vw, 4.5rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.date {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+footer {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+footer a {
+  color: var(--accent-2);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.dot {
+  margin: 0 0.5rem;
+}
