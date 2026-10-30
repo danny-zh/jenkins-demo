@@ -29,7 +29,7 @@ pipeline{
                     // some block
                     sh 'echo "Logging in to Docker Hub..."'
                     sh 'echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USER --password-stdin'
-                    sh 'docker tag time-app $DOCKERHUB_USER/time-app:latest'
+                    sh 'docker tag time-app userforpython47/time-app:latest'
                     sh 'docker push userforpython47/time-app:latest'
                 }
   
@@ -46,6 +46,7 @@ pipeline{
         always {
             echo 'Cleaning up...'
             sh 'docker rm -f time-app-container || true'
+            cleanWs()
         }
     }
 
