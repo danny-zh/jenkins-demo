@@ -21,4 +21,17 @@ pipeline{
             }
         }
     }
+    post {
+        failure {
+            echo ' "Build failed!"'
+        }
+        success {
+            echo ' "Build succeeded!"'
+        }
+        always {
+            echo ' "Cleaning up..."'
+            sh 'docker rm -f time-app-container || true'
+        }
+    }
+
 }
