@@ -16,8 +16,8 @@ pipeline{
         stage("Test") {
             steps{
                 echo ' "Testing the app..."'
-                sh 'docker run --name time-app-container -p 5000:5000 time-app'
-                echo 'App is running on port localhost:5000'
+                sh 'docker run -d --name time-app-container -p 5000:5000 time-app'
+                echo 'App is running on port http://localhost:5000'
             }
         }
     }
