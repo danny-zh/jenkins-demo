@@ -6,12 +6,12 @@ pipeline{
         CONTAINER_NAME = 'time-app-container'
     }
     stages{
-        stage("Checkout") {
-            steps{
-                echo 'Checking out code...'
-                git branch: 'main', credentialsId: '777e4912-8315-4961-89ac-5326823af09b', url: 'https://github.com/danny-zh/jenkins-demo.git'
-            }
-        }
+        // stage("Checkout") {
+        //     steps{
+        //         echo 'Checking out code...'
+        //         git branch: 'main', credentialsId: '777e4912-8315-4961-89ac-5326823af09b', url: 'https://github.com/danny-zh/jenkins-demo.git'
+        //     }
+        // }
         stage("Build") {
             steps{
                 echo 'Building the app...'
@@ -39,11 +39,11 @@ pipeline{
 
                 echo 'Building metadata'
 
-                sh """echo {
-                    \\"image_name\\": \\"${IMAGE_NAME}\\",
-                    \\"image_tag\\": \\"${IMAGE_TAG}\\",
-                    \\"container_name\\": \\"${CONTAINER_NAME}\\"
-                } > metadata-build-${BUILD_NUMBER}.json"""
+                sh """echo \"{
+                    'image_name': '${IMAGE_NAME}',
+                    'image_tag': '${IMAGE_TAG}',
+                    'container_name': '${CONTAINER_NAME}'
+                }\" > metadata-build-${BUILD_NUMBER}.json"""
 
                 archiveArtifacts artifacts: "metadata-build-${BUILD_NUMBER}.json", followSymlinks: false
             }
