@@ -3,6 +3,7 @@ pipeline{
     environment {
         IMAGE_NAME = 'userforpython47/time-app'
         IMAGE_TAG='latest'
+        CONTAINER_NAME = 'time-app-container'
     }
     stages{
         stage("Checkout") {
@@ -20,7 +21,7 @@ pipeline{
         stage("Test") {
             steps{
                 echo 'Testing the app...'
-                sh "docker run -d --name time-app-container -p 5000:5000 ${IMAGE_NAME}:${IMAGE_TAG}"
+                sh "docker run -d --name ${CONTAINER_NAME} -p 5000:5000 ${IMAGE_NAME}:${IMAGE_TAG}"
                 echo 'App is running on port http://localhost:5000'
                 sleep 20
             }
@@ -48,7 +49,7 @@ pipeline{
         }
         always {
             echo 'Cleaning up...'
-            sh 'docker rm -f time-app-container || true'
+            sh 'docker rm -f ${CONTAINER_NAME} || true'
             cleanWs()
         }
     }
