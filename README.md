@@ -35,6 +35,17 @@ uvicorn app.main:app --host 0.0.0.0 --port 5000
 pytest
 ```
 
+## Makefile shortcuts (from the repo root)
+
+```bash
+make app-run     # create .venv, install deps, start on http://localhost:5000 (auto-reload)
+make app-test    # run pytest
+make app-check   # curl /healthz and / on a running app
+make app-clean   # remove .venv and caches
+```
+
+Override the port with `make app-run APP_PORT=8000`.
+
 ## Docker
 
 ```bash

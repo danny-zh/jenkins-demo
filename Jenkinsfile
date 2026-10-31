@@ -1,5 +1,9 @@
 pipeline{
     agent any
+    environment {
+        IMAGE_NAME = 'userforpython47/time-app'
+        IMAGE_TAG='latest'
+    }
     stages{
         stage("Checkout") {
             steps{
@@ -10,13 +14,13 @@ pipeline{
         stage("Build") {
             steps{
                 echo 'Building the app...'
-                sh 'docker build -t time-app .'
+                sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
             }
         }
         stage("Test") {
             steps{
                 echo 'Testing the app...'
-                sh 'docker run -d --name time-app-container -p 5000:5000 time-app'
+                sh "docker run -d --name time-app-container -p 5000:5000 ${IMAGE_NAME}:${IMAGE_TAG}"
                 echo 'App is running on port http://localhost:5000'
                 sleep 20
             }
@@ -29,8 +33,7 @@ pipeline{
                     // some block
                     sh 'echo "Logging in to Docker Hub..."'
                     sh 'echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USER --password-stdin'
-                    sh 'docker tag time-app userforpython47/time-app:latest'
-                    sh 'docker push userforpython47/time-app:latest'
+                    sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
                 }
   
             }
