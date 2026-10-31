@@ -39,11 +39,11 @@ pipeline{
 
                 echo 'Building metadata'
 
-                sh "echo {
-                    \"image_name\": \"${IMAGE_NAME}\",
-                    \"image_tag\": \"${IMAGE_TAG}\",
-                    \"container_name\": \"${CONTAINER_NAME}\"
-                } > metadata-build-${BUILD_NUMBER}.json"
+                sh """echo {
+                    \\"image_name\\": \\"${IMAGE_NAME}\\",
+                    \\"image_tag\\": \\"${IMAGE_TAG}\\",
+                    \\"container_name\\": \\"${CONTAINER_NAME}\\"
+                } > metadata-build-${BUILD_NUMBER}.json"""
 
                 archiveArtifacts artifacts: "metadata-build-${BUILD_NUMBER}.json", followSymlinks: false
             }
